@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Example blog">
+
+
+    <meta property="twitter:site" content="@example">
+
+<meta property="og:site_name" content="Cocoa Enhanced" />
+<meta property="og:locale" content="en-US" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://codergu64.github.io/post/maytwenty-seven/" />
+<meta property="og:title" content="Java数据结构与算法学习笔记（四）" />
+<meta property="twitter:title" content="Java数据结构与算法学习笔记（四）">
+
+    <meta property="og:image" content="https://codergu64.github.io/img/banner.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://codergu64.github.io/img/banner.png">
+
+<meta property="og:description" content="">
+<meta property="twitter:description" content="">
+
+<title>
+
+
+     Cocoa Enhanced - Java数据结构与算法学习笔记（四） 
+
+</title>
+<link rel="canonical" href="https://codergu64.github.io/post/maytwenty-seven/">
+
+
+<style media="screen">
+  @font-face {
+  font-family: 'Nexa Bold';
+  src: url('https://codergu64.github.io/fonts/Nexa Bold.otf');
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, div.column {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+a,
+a:visited,
+a:focus,
+a:active {
+  text-decoration: none;
+}
+html {
+  height: 100%;
+  font-size: 16px;
+}
+body {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 100%;
+  font-weight: 400;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  color: #111111;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility !important;
+}
+.icon {
+  text-rendering: geometricPrecision !important;
+}
+section {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  width: 100%;
+}
+div.column {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  width: 100%;
+}
+.container {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  width: 100%;
+}
+div.header .container {
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+}
+div.header .content {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+div.header .container .logo {
+  
+  max-width: 100px;
+  
+  margin-left: -2em;
+}
+div.header .name {
+  padding-top: 20px;
+  font-size: 28px;
+  font-family: 'Nexa Bold', 'Helvetica Neue', 'Arial', sans-serif;
+  letter-spacing: -0.005rem;
+  
+  text-transform: uppercase;
+  
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  color: #333333;
+}
+div.header nav {
+  margin-bottom: 16px;
+}
+div.header nav ul {
+  list-style: none;
+  text-align: center;
+  display: -webkit-inline-flex;
+  display: -moz-inline-flex;
+  display: -ms-inline-flexbox;
+  display: -ms-inline-flex;
+  display: inline-flex;
+}
+div.header nav ul li {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+div.header nav ul li:first-child {
+  margin-left: 0;
+}
+div.header nav ul li:last-child {
+  margin-right: 0;
+}
+div.header nav ul a {
+  color: #555555;
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  -webkit-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+div.header nav ul a:hover {
+  color: #111111;
+}
+div.footer .container {
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+  width: 100%;
+  text-align: center;
+}
+div.footer .container a {
+  font-size: 14px;
+  margin-left: 6px;
+  margin-right: 6px;
+  opacity: 0.6;
+  -webkit-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+div.footer .container a:first-child {
+  margin-left: 0;
+}
+div.footer .container a:last-child {
+  margin-right: 0;
+}
+div.footer .container a:hover {
+  opacity: 0.8;
+}
+div.footer .container a .icon {
+  width: 16px;
+  height: 16px;
+}
+div.footer .container .copyright {
+  flex-grow: 0.5;
+  text-align: start;
+}
+div.footer .container .icons {
+  flex-grow: 0.5;
+  text-align: end;
+}
+div.main .container {
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  justify-content: flex-start;
+}
+div.main .content {
+  color: #111111;
+  font-size: 16px;
+}
+div.main .content .title-container {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+}
+div.main .content .posts {
+  
+  
+}
+div.main .content .page-heading {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  letter-spacing: -0.005rem;
+  text-transform: uppercase;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  color: #333333;
+  margin-bottom: 16px;
+}
+div.main .content .front-matter .page-heading {
+  margin-bottom: 0;
+}
+div.main .content .front-matter .meta {
+  font-size: 14px;
+  color: #666666;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  margin-bottom: 32px;
+}
+div.main .content .front-matter .date,
+div.main .content .front-matter .author,
+div.main .content .front-matter .tags,
+div.main .content .front-matter .word-count,
+div.main .content .front-matter .middot:before {
+  display: none;
+}
+div.main .content .front-matter .middot:before {
+  font-size: 6px;
+  margin: 0 6px;
+  vertical-align: middle;
+  content: "•";
+}
+div.main .content .front-matter .tags ul {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+div.main .content .front-matter .tags ul li {
+  -webkit-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+div.main .content .front-matter .tags ul li:hover {
+  opacity: 0.7;
+}
+div.main .content .front-matter .tags ul li a {
+  color: #666666;
+}
+
+div.main .container.f04 {
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+}
+div.main .container.f04 .content {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+div.main .container.f04 .content .num {
+  margin: 30px 0px 30px 0;
+  font-weight: 400;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: 50px;
+}
+div.main .container.f04 .content .detail {
+  margin-bottom: 40px;
+}
+div.main .container .content .groupby {
+  margin-top: 1em;
+  padding-left: 0.5em;
+}
+div.main .container .content .post-item {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  display: list-item;
+  list-style: disc inside;
+}
+div.main .container .content .post-item .meta {
+  font-size: 14px;
+  color: #666666;
+  display: none;
+  min-width: 100px;
+}
+div.main .container .content .see-more {
+  font-style: italic;
+  float: right;
+  font-size: 0.9em;
+  margin-top: 2em;
+  color: #313537;
+}
+div.main .container .content .see-more:hover {
+  color: #666;
+}
+section {
+  padding: 0 16px;
+}
+div.column {
+  padding: 0 16px;
+}
+div.header {
+  padding-top: 10px;
+}
+div.header-home {
+  padding-top: 36px;
+}
+div.main {
+  padding-top: 32px;
+}
+div.main .container .content .post-item .meta {
+    display: block;
+}
+div.main .container .content .post-item {
+    display: flex;
+    list-style: none;
+}
+a {
+  color: #428bca;
+  -webkit-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+a:hover {
+  color: #2a6496;
+}
+img {
+  max-width: 100%;
+}
+div.main .content {
+    width: 100%;
+}
+div.main .content .markdown {
+  font-size: 1.1em;
+  line-height: 1.75em;
+  color: #313537;
+  font-family: serif;
+  font-weight: 300;
+}
+div.main .content .markdown h1,
+div.main .content .markdown h2,
+div.main .content .markdown h3,
+div.main .content .markdown h4,
+div.main .content .markdown h5,
+div.main .content .markdown h6 {
+  font-size: 22px;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  letter-spacing: -0.005rem;
+  font-weight: 700;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  color: #333333;
+  text-transform: none;
+  margin-top: 1.75rem;
+}
+div.main .content .markdown h1 {
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+}
+div.main .content .markdown h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+div.main .content .markdown h3 {
+  font-size: 1em;
+  margin-bottom: 1rem;
+}
+div.main .content .markdown h4,
+div.main .content .markdown h5,
+div.main .content .markdown h6 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  letter-spacing: none;
+}
+div.main .content .markdown code,
+div.main .content .markdown pre {
+  font-family: 'Menlo', monospace;
+  font-size: 0.98rem;
+  background-color: #f7f7f7;
+}
+div.main .content .markdown code {
+  /* enclosed by single backtick (`) */
+  padding: .15em .5em;
+  border-radius: 2px;
+}
+div.main .content .markdown pre {
+  /* Hugo specific: consider using the 'highlight' shortcode */
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  line-height: 1.5em;
+  white-space: pre;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+div.main .content .markdown pre code {
+  /* enclosed by 4 backticks (````) */
+  padding: 0;
+  font-size: 0.9rem;
+}
+div.main .content .markdown a code {
+  color: #428bca !important;
+}
+div.main .content .markdown a code:hover {
+  text-decoration: underline;
+}
+div.main .content .markdown p {
+  
+  text-align: justify;
+  
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+div.main .content .markdown ul,
+div.main .content .markdown ol,
+div.main .content .markdown dl {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+div.main .content .markdown dt {
+  font-weight: bold;
+}
+div.main .content .markdown dd {
+  margin-bottom: .5rem;
+}
+div.main .content .markdown ul {
+  list-style-type: disc;
+  list-style-position: outside;
+  margin-bottom: 1.25rem;
+}
+div.main .content .markdown ol {
+  list-style-type: decimal;
+  margin-bottom: 1.25rem;
+}
+div.main .content .markdown li {
+  margin-left: 2em;
+}
+div.main .content .markdown em {
+  font-style: italic;
+}
+div.main .content .markdown strong {
+  font-weight: 700;
+}
+div.main .content .markdown hr {
+  position: relative;
+  margin: 1.75rem 0;
+  border: 0;
+  border-top: 1px solid #808080;
+  border-top: 1px solid #999999;
+}
+div.main .content .markdown abbr {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #666666;
+  text-transform: uppercase;
+}
+div.main .content .markdown abbr[title] {
+  cursor: help;
+  border-bottom: 1px dotted #808080;
+}
+div.main .content .markdown blockquote {
+  padding: .5rem 1rem;
+  margin: .8rem 0;
+  color: #7a7a7a;
+  border-left: .25rem solid #e5e5e5;
+}
+div.main .content .markdown blockquote p:last-child {
+  margin-bottom: 0;
+}
+div.main .content .markdown figure {
+  width: 100%;
+  background: #fff;
+  margin-bottom: 1em;
+}
+div.main .content .markdown figure img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  position: static;
+  margin: auto;
+}
+div.main .content .markdown table {
+  margin-bottom: 1rem;
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  border-collapse: collapse;
+}
+div.main .content .markdown td,
+div.main .content .markdown th {
+  padding: .25rem .5rem;
+  border: 1px solid #e5e5e5;
+}
+div.main .content .markdown tbody tr:nth-child(odd) td,
+div.main .content .markdown tbody tr:nth-child(odd) th {
+  background-color: #f7f7f7;
+}
+div.main .content .markdown .footnotes ol {
+  list-style-type: decimal;
+  margin-left: 16px;
+}
+div.main .content .markdown .footnotes li {
+  list-style-type: unset;
+}
+div.main .content .markdown .footnote-ref {
+  font-size: 0.7em;
+}
+div.main .content .navigation {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  padding: 2em;
+}
+div.main .content .navigation div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  margin-top: 1em;
+}
+div.main .content .navigation .icon {
+  width: 16px;
+  height: 16px;
+}
+div.main .content .navigation a {
+  width: 250px;
+  margin: 0 1em;
+  text-align: center;
+  font-style: italic;
+  color: #313537;
+}
+div.main .content .share, div.main .content .share div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+}
+div.main .content .share {
+  background-color: rgba(152, 152, 152, 0.07);
+  padding: 1em 0;
+}
+div.main .content .share a {
+  margin: 0 6px;
+}
+kbd {
+  padding: 0.1em 0.6em;
+  border: 1px solid #ccc;
+  font-size: 11px;
+  font-family: Arial,Helvetica,sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  -moz-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+  -webkit-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 0 0.1em;
+  text-shadow: 0 1px 0 #fff;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* Fonts */
+
+
+.wf-raleway-n4-active body, 
+.wf-raleway-n4-active div.header nav ul a,
+.wf-raleway-n7-active div.main .content .page-heading,
+.wf-raleway-n2-active div.main .container.f04 .content .num,
+.wf-raleway-n7-active div.main .content .markdown h1,
+.wf-raleway-n7-active div.main .content .markdown h2,
+.wf-raleway-n7-active div.main .content .markdown h3,
+.wf-raleway-n7-active div.main .content .markdown h4,
+.wf-raleway-n7-active div.main .content .markdown h5,
+.wf-raleway-n7-active div.main .content .markdown h6 {
+      font-family: 'Raleway';
+}
+
+.wf-merriweather-n3-active div.main .content .markdown {
+      font-family: 'Merriweather';
+}
+
+.wf-ubuntu-mono-n4-active div.main .content .markdown code,
+.wf-ubuntu-mono-n4-active div.main .content .markdown pre {
+      font-family: 'Ubuntu Mono';
+}
+
+
+</style>
+<style media="(min-width: 600px)">
+  body {
+-webkit-justify-content: center;
+-moz-justify-content: center;
+-ms-justify-content: center;
+justify-content: center;
+}
+.non-narrow.zero-top-spacing {
+padding-top: 0 !important;
+}
+section {
+padding: 0 16px;
+margin-left: 100px;
+margin-right: 100px;
+
+max-width: 750px;
+
+}
+div.column {
+padding: 0 16px;
+
+max-width: 750px;
+
+}
+div.header {
+background-color: transparent;
+}
+div.header .container {
+-webkit-justify-content: flex-start;
+-moz-justify-content: flex-start;
+-ms-justify-content: flex-start;
+justify-content: flex-start;
+}
+div.header .container .logo {
+margin: 0;
+}
+div.header-home .container .logo {
+max-width: 216px;
+margin-left: 24px;
+}
+div.header-home .name-home {
+padding-top: 30px;
+font-size: 40px;
+}
+div.header-home nav ul a {
+font-size: 18px;
+}
+div.header .content {
+-webkit-align-items: flex-start;
+-moz-align-items: flex-start;
+-ms-align-items: flex-start;
+align-items: flex-start;
+}
+div.header .name {
+color: #333333;
+}
+div.header nav {
+font-size: 14px;
+margin-bottom: 0;
+}
+div.header nav ul {
+text-align: left;
+}
+div.header nav ul a {
+color: #666666;
+}
+div.header nav ul a:hover {
+color: #333333;
+}
+div.footer {
+background-color: transparent;
+}
+div.footer .container {
+flex-direction: row;
+}
+div.footer .container a {
+margin-left: 3px;
+margin-right: 3px;
+color: #666666;
+}
+div.footer .container a:hover {
+color: #333333;
+}
+div.footer .container a .icon {
+font-size: 18px;
+}
+div.footer .container a .icon.larger {
+font-size: 20px;
+}
+div.main .content .front-matter .date,
+div.main .content .front-matter .author,
+div.main .content .front-matter .tags,
+div.main .content .front-matter .word-count,
+div.main .content .front-matter .middot:before {
+display: initial;
+}
+div.main .container.f04 {
+-webkit-justify-content: flex-start;
+-moz-justify-content: flex-start;
+-ms-justify-content: flex-start;
+justify-content: flex-start;
+}
+div.main .container.f04 .content {
+-webkit-align-items: flex-start;
+-moz-align-items: flex-start;
+-ms-align-items: flex-start;
+align-items: flex-start;
+}
+div.main .container.f04 .content .num {
+margin: 0 0 10px 0;
+font-size: 32px;
+}
+div.main .container.f04 .content .detail {
+margin-bottom: 30px;
+}
+.container {
+padding: 0 30px;
+}
+div.header {
+padding-top: 60px;
+padding-bottom: 60px;
+}
+div.footer {
+padding-top: 60px;
+padding-bottom: 60px;
+}
+div.main {
+padding-top: 0;
+}
+div.main .content {
+  
+  font-size: 16px;
+  
+}
+div.main .container .content .post-item {
+display: flex;
+list-style: none;
+padding-left: 1.5em;
+}
+div.main .container .content .post-item .meta {
+display: block;
+}
+div.main .content .markdown blockquote {
+padding-right: 5rem;
+padding-left: 1.25rem;
+}
+div.main .content .navigation {
+-webkit-flex-direction: row;
+-moz-flex-direction: row;
+-ms-flex-direction: row;
+flex-direction: row;
+}
+div.main .content .navigation div {
+margin-top: 0em;
+}
+
+</style>
+<style media="(min-width: 769px)">
+  div.main .content .markdown figure {
+width: 110%;
+margin-left: -4%;
+}
+div.main .content .markdown img {
+max-width: 110%;
+width: 110%;
+margin-left: -4%;
+}
+div.main .content .markdown pre {
+width: 110%;
+margin-left: -4%;
+}
+
+</style>
+
+<noscript>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet">
+</noscript>
+
+
+  <style type="text/css" media="screen">
+    .hljs{display:block;background:white;padding:0.5em;color:#333333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-string,.hljs-variable,.hljs-template-variable,.hljs-strong,.hljs-emphasis,.hljs-quote{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-literal,.hljs-symbol,.hljs-bullet,.hljs-attribute{color:#0086b3}.hljs-section,.hljs-name{color:#63a35c}.hljs-tag{color:#333333}.hljs-title,.hljs-attr,.hljs-selector-id,.hljs-selector-class,.hljs-selector-attr,.hljs-selector-pseudo{color:#795da3}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}
+  </style>
+
+
+
+  <style type="text/css" media="screen">
+    .progressive{overflow:hidden;position:relative;background:#efefef}.progressive__img{width:100%;height:100%;transform:translateZ(0)}.progressive--not-loaded{filter:blur(30px)}.progressive--is-loaded{filter:blur(20px);animation:a .5s both}@keyframes a{0%{filter:blur(20px)}to{filter:blur(0)}}
+
+  </style>
+
+
+
+
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://codergu64.github.io/img/logo.png"
+
+>
+
+
+
+
+</head>
+
+
+<body>
+
+
+<div class="header column">
+
+    <div class="container">
+        
+        <a href="https://codergu64.github.io/"><img class="logo" src="https://codergu64.github.io/img/logo.png" alt="logo"></a>
+        
+        <div class="content">
+            <a href="https://codergu64.github.io/"><div class="name"><h1>Cocoa Enhanced</h1></div></a>
+            <nav>
+                <ul>
+                    
+                    
+                        
+                            
+                            <li><a href="https://codergu64.github.io/post">post</a></li>
+                            
+                        
+                    
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="main column">
+    <div class="container">
+        <div class="content">
+            <div class="page-heading">
+
+    
+    Draft::Java数据结构与算法学习笔记（四）
+    
+
+</div>
+
+            <div class="markdown">
+                
+    
+    
+
+<h1 id="cvprogrammerblog">CVProgrammerBlog</h1>
+
+<h2 id="java数据结构与算法学习笔记-四">Java数据结构与算法学习笔记（四）</h2>
+
+<p>哈希表可以提供快速的插入操作和查找操作。第一次接触哈希表时，它的优点多得让人难以置信。不论哈希表中有多少数据，插入和删除（有时包括侧除）只需要接近常量的时间即0(1）的时间级。实际上，这只需要几条机器指令。</p>
+
+<p>哈希表运算得非常快，在计算机程序中，如果需要在一秒种内查找上千条记录通常使用哈希表（例如拼写检查器)哈希表的速度明显比树快，树的操作通常需要O(N)的时间级。哈希表不仅速度快，编程实现也相对容易。</p>
+
+<p>哈希表也有一些缺点它是基于数组的，数组创建后难于扩展某些哈希表被基本填满时，性能下降得非常严重，所以程序虽必须要清楚表中将要存储多少数据（或者准备好定期地把数据转移到更大的哈希表中，这是个费时的过程）。</p>
+
+<p>然而如果不需要有序遍历数据，并且可以提前预测数据量的大小。那么哈希表在速度和易用性方面是无与伦比的。</p>
+
+<p>而数据存储结构，就是数据的元素与元素之间在计算机中的一种表示，它的目的是为了解决空间规模问题，或者是通过空间规模问题从而间接地解决时间规模问题。我们知道，随着输入的数据量越来越大，在有限的内存里，不能把这些数据完全的存下来，这就对数据存储结构和设计存储的算法提出了更高的要求。所以我们需要对树、图结构有个初步的了解。</p>
+
+<h3 id="哈希表相关">哈希表相关</h3>
+
+<div align=center>
+<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558941378861&di=4eb3ceedb7a6de61a0c8dfceb599ed7f&imgtype=0&src=http%3A%2F%2Fdata.biancheng.net%2Fuploads%2Fallimg%2F171024%2F2-1G02415452NG.png">
+</div>
+<div align=center>
+哈希表示例
+</div>
+
+<ul>
+<li>哈希表基于数组</li>
+<li>关键字值的范围通常比数组容量大</li>
+<li>关键字值通过哈希函数映射为数组的下标</li>
+<li>英文字典是一个数据库的典型例子</li>
+<li>一个关键字哈希化到已占有的数组单元，这种情况叫做冲突</li>
+<li>冲突可以用两种方法解决：开放地址法和链地址法</li>
+<li>在开放地址法中，把冲突的数据项放在数组的其他位置</li>
+<li>在链地址法中，每个数组单元包装了包装了一个链表，把所有映射到同一数组下标的数据项都插在这个链表中</li>
+<li>开放地址法：线性探测、二次探测和再哈希化</li>
+<li>在线性探测中，步长总是1，所以如果x是哈希函数计算得到的数组下标，那么探测序列就是x，x+1，x+2，x+3，依次类推</li>
+<li>找到一个特定项需要经过的步数叫做探测长度</li>
+<li>在线性探测中，已填充单元的长度不断增加，它们叫做首次聚集，这会降低哈希表的性能</li>
+<li>在二次探测中，x的位移是步数的平方，所以探测的序列是x，x+1,x+4,x+9,依此类推</li>
+<li>二次探测消除了首次聚集，但是产生了二次聚集，它比首次聚集的危害略小</li>
+<li>二次聚集的发生是因为所有映射到同一个单元的关键字，在探测过程中执行了相同的序列</li>
+<li>发生上述的情况是因为步长只依赖于哈希值，与关键字无关</li>
+<li>在再哈希法中，步长依赖于关键字，且从第二个哈希函数中得到</li>
+<li>在再哈希法中，如果第二个哈希函数返回一个值s，那么探测的序列就是x,x+s,x+2s,x+3s,x+4s,依次类推，这里s由关键字得到，但探测过程中保持常量</li>
+<li>装填因子是表中数据项数和数组容量的比值</li>
+<li>开放地址法中的最大装填因子应该在0.5附近，若具有相同的装填因子，对于再哈希法来说，查找的平均探测长度是2</li>
+<li>在开放地址法中，当装填因子接近1时，查找时间趋于无限</li>
+<li>在开放地址法中，关键是哈希表不能装的太满</li>
+<li>对于链地址法，装填因子为1比较合适，这时，成功的探测长度平均是1.5，不成功的是2.0</li>
+<li>链地址法的探测长度随着装填因子变大而线性增长</li>
+<li>字符串可以这样哈希化，每个字符乘以常数的不同次幂，求和，然后用取模操作符(%)缩减结果，以适应哈希表的容量</li>
+<li>如果在Horner方法中用多项式表示哈希化，每一步中都应用取模操作符，以免发生溢出</li>
+<li>哈希表的容量通常是一个质数，这在二次探测和再哈希法中非常重要</li>
+<li>哈希表可用于外部存储，一种做法是用哈希表的单元存储磁盘文件的块号码</li>
+</ul>
+
+<h3 id="树相关">树相关</h3>
+
+<div align=center>
+<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558941308780&di=9484ccfb64714327894588234fc5a1ad&imgtype=0&src=http%3A%2F%2Fpic002.cnblogs.com%2Fimages%2F2012%2F327434%2F2012110200242398.jpg">
+</div>
+<div align=center>
+树示例
+</div>
+
+<ul>
+<li>多叉树比二叉树有更多的关键字和节点</li>
+<li>2-3-4树是多叉树，每个节点最多有三个关键字和四个子节点</li>
+<li>多叉树中，节点中数据项按关键字升序排列</li>
+<li>2-3-4树中，所有的插入都在叶节点上，所有的叶节点在同一层上</li>
+<li>在2-3-4树中，有三种可能的节点：2-节点有1个关键字和2个子节点，3-节点有2个关键字和3个子节点，4-节点有三个关键字和4个子节点</li>
+<li>2-3-4树中没有1-节点</li>
+<li>在2-3-4树中查找时，检查每个节点的关键字。没有找到时，如果要查找节点的关键字比key 0小，下一个节点就是child 0；如果要查找节点的关键字在key 0和key 1之间，下一个节点就是child2；如果要查找的节点的关键字大于key 2，下一个节点就是child 3</li>
+<li>在2-3-4树中插入需要在查找插入点的过程中，顺着树的路径向下分裂路径上每个满的节点</li>
+<li>分裂根要创建两个新节点；分裂出另一个节点，创建一个新节点</li>
+<li>只有分裂根时2-3-4树的高度才会增长</li>
+<li>2-3-4树和红-黑树之间存在一对一的对应关系</li>
+<li>要把2-3-4树转化成红-黑树，需要把每个2-节点变成黑色节点，把每个3-节点变成一个黑色的父节点和一个红色的子节点，把每个4-节点变成一个黑色的父节点和两个红色子节点</li>
+<li>当3-节点转化成一个父节点和一个子节点时，每个节点都可以做父节点</li>
+<li>2-3-4树中分裂节点和在红-黑树中进行颜色变换是一样的</li>
+<li>红-黑树中的旋转对应于转换3-节点时在两种可能的（倾斜）方向间变化</li>
+<li>2-3-4树的高度为logN，查找时间和高度成正比</li>
+<li>2-3-4树很浪费空间，因为很多节点还不满一半</li>
+<li>2-3树类似于2-3-4树，除了它只能有1个或2个数据项以及1、2或3个子节点</li>
+<li>在2-3树中插入需要找到合适的叶节点，然后从叶节点开始向上分裂，直到找到不满的节点</li>
+<li>外部存储的意思是在主存外面保存数据，通常是在磁盘上</li>
+<li>外部存储器比主存大，便宜（每字节），但是慢</li>
+<li>外部存储器中的数据通常需要在主存间来回传送，一次传送一块</li>
+<li>在外部存储器中的数据可以按关键字顺序有序排列。这样查找很快，但插入（或删除）很慢</li>
+<li>B-树是多叉树，每个节点可以有几十或者上百个关键字和子节点</li>
+<li>B-树中子节点的个数总是比关键数的个数多1</li>
+<li>为达到最好的性能，B-树通常在一个节点中保存一块的数据</li>
+<li>如果查找条件涉及多个关键字，在文件的所有记录中顺序查找可能是最实用的方法</li>
+</ul>
+
+<p>树结构简单实现，eg：</p>
+
+<pre><code class="language-java">import java.util.Scanner;
+ 
+class Node {
+	public String value; // 字母节点
+	public Node left, right;// 左右子节点
+	
+	static String getChar() {
+		Scanner sc = new Scanner(System.in);
+		return sc.next();
+		
+	}
+	
+	static void createTree(Node t) {
+		String c = getChar();
+		if (&quot;0&quot;.equals(c)) {
+			t.value = &quot;0&quot;;
+		} else {
+			t.value = c;
+			t.left = new Node();
+			createTree(t.left);
+			t.right = new Node();
+			createTree(t.right);
+		}
+	}
+	
+	static void preOrder(Node t) {
+		if(null != t) {
+			System.out.print(t.value + &quot; &quot;);
+			preOrder(t.left);
+			preOrder(t.right);
+		}
+	}
+	
+ 
+	static void lastOrder(Node t) {
+		if(null != t) {
+			lastOrder(t.left);
+			lastOrder(t.right);
+			System.out.print(t.value + &quot; &quot;);
+		}
+	}
+	
+	public static void main(String[] args) {
+		Node t = new Node();
+		createTree(t);
+		System.out.println(&quot;t&quot;);
+		System.out.print(&quot;先序遍历:&quot;);
+		preOrder(t);
+		System.out.println();
+		System.out.print(&quot;后序遍历:&quot;);
+		lastOrder(t);
+	}
+}
+</code></pre>
+
+<p>测试结果:
+<div align=center>
+<img src="http://dl2.iteye.com/upload/attachment/0089/1664/0d1ea417-7792-32b0-abfb-6c0d79a51969.jpg">
+</div></p>
+
+<h3 id="图相关">图相关</h3>
+
+<div align=center>
+<img src="https://images0.cnblogs.com/blog2015/715283/201508/271650248127522.png">
+</div>
+<div align=center>
+图结构示例
+</div>
+
+<ul>
+<li>带权图中，边带有一个数字，叫做权，它代表距离、耗费、时间或其他意义</li>
+<li>带权图的最小生成树中所有顶点和连接它们的必要的边，且这些边的权值最小</li>
+<li>优先级队列的算法可用于寻找带权图的最小生成树</li>
+<li>带权图的最小生成树模拟了真实世界的许多情况，例如在两城市间铺设线缆</li>
+<li>无权图的最短路径问题要找到两点间的路径，且路径长度最短</li>
+<li>带权图的最短路径问题可以用Dijkstra算法解决</li>
+<li>对于大型的稀疏图，用邻接表表示，相对于用邻接矩阵表示，可以提高算法的运行效率</li>
+<li>每一对顶点间的最短路径问题是要找到图中没对顶点间的权值和。Floyd算法用来解决这个问题</li>
+<li>有些图的算法需要指数级的时间，因此在顶点多的图中应用不太实际</li>
+</ul>
+
+<p>Graph图示例：</p>
+
+<pre><code class="language-java">import java.util.HashMap;
+import java.util.HashSet;
+/**
+ * 
+ * 图
+ * 
+ */
+public class Graph {
+	public HashMap&lt;Integer,Node&gt; nodes;
+	public HashSet&lt;Edge&gt; edges;
+ 
+	public Graph() {
+		nodes = new HashMap&lt;&gt;();
+		edges = new HashSet&lt;&gt;();
+	}
+}
+</code></pre>
+
+<p>Node节点示例：</p>
+
+<pre><code class="language-java">import java.util.ArrayList;
+/**
+ * 
+ * 图的节点
+ *
+ */
+public class Node {
+	public int value;
+	public int in;//入度
+	public int out;//出度
+	public ArrayList&lt;Node&gt; nexts;//下一级节点
+	public ArrayList&lt;Edge&gt; edges;//边
+ 
+	public Node(int value) {
+		this.value = value;
+		in = 0;
+		out = 0;
+		nexts = new ArrayList&lt;&gt;();
+		edges = new ArrayList&lt;&gt;();
+	}
+}
+</code></pre>
+
+<p>Edge边：</p>
+
+<pre><code class="language-java">/**
+ * 
+ * 图的边
+ *
+ */
+public class Edge {
+	public int weight;//权重
+	public Node from;
+	public Node to;
+ 
+	public Edge(int weight, Node from, Node to) {
+		this.weight = weight;
+		this.from = from;
+		this.to = to;
+	}
+ 
+}
+
+</code></pre>
+
+<p>GraphGenerator图的生成（反序列化构造）:</p>
+
+<pre><code class="language-java">/**
+ * 
+ * 图的生成
+ *
+ */
+public class GraphGenerator {
+ 
+	public static Graph createGraph(Integer[][] matrix) {
+		Graph graph = new Graph();
+		for (int i = 0; i &lt; matrix.length; i++) {//长度为3的数组
+			Integer weight = matrix[i][0];
+			Integer from = matrix[i][1];
+			Integer to = matrix[i][2];
+			if (!graph.nodes.containsKey(from)) {
+				graph.nodes.put(from, new Node(from));
+			}
+			if (!graph.nodes.containsKey(to)) {
+				graph.nodes.put(to, new Node(to));
+			}
+			Node fromNode = graph.nodes.get(from);
+			Node toNode = graph.nodes.get(to);
+			Edge newEdge = new Edge(weight, fromNode, toNode);
+			fromNode.nexts.add(toNode);
+			fromNode.out++;
+			toNode.in++;
+			fromNode.edges.add(newEdge);
+			graph.edges.add(newEdge);
+		}
+		return graph;
+	}
+ 
+}
+</code></pre>
+
+<h3 id="总结">总结</h3>
+
+<table>
+<thead>
+<tr>
+<th align="center">数据结构</th>
+<th align="center">查找</th>
+<th align="center">插入</th>
+<th align="center">删除</th>
+<th align="center">遍历</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">数组</td>
+<td align="center">O(N)</td>
+<td align="center">O(1)</td>
+<td align="center">O(N)</td>
+<td align="center">&ndash;</td>
+</tr>
+
+<tr>
+<td align="center">有序数组</td>
+<td align="center">O(logN)</td>
+<td align="center">O(N)</td>
+<td align="center">O(N)</td>
+<td align="center">O(N)</td>
+</tr>
+
+<tr>
+<td align="center">链表</td>
+<td align="center">O(N)</td>
+<td align="center">O(1)</td>
+<td align="center">O(N)</td>
+<td align="center">&ndash;</td>
+</tr>
+
+<tr>
+<td align="center">有序链表</td>
+<td align="center">O(N)</td>
+<td align="center">O(N)</td>
+<td align="center">O(N)</td>
+<td align="center">O(N)</td>
+</tr>
+
+<tr>
+<td align="center">二叉树（一般情况）</td>
+<td align="center">O(logN)</td>
+<td align="center">O(logN)</td>
+<td align="center">O(logN)</td>
+<td align="center">O(N)</td>
+</tr>
+
+<tr>
+<td align="center">二叉树（最坏情况）</td>
+<td align="center">O(N)</td>
+<td align="center">O(N)</td>
+<td align="center">O(N)</td>
+<td align="center">O(N)</td>
+</tr>
+
+<tr>
+<td align="center">平衡树（一般情况和最坏）</td>
+<td align="center">O(logN)</td>
+<td align="center">O(logN)</td>
+<td align="center">O(logN)</td>
+<td align="center">O(N)</td>
+</tr>
+
+<tr>
+<td align="center">哈希表</td>
+<td align="center">O(1)</td>
+<td align="center">O(1)</td>
+<td align="center">O(1)</td>
+<td align="center">&ndash;</td>
+</tr>
+</tbody>
+</table>
+
+<p><div align="center">
+通用数据存储结构</p>
+
+<h2 id="div"></div></h2>
+
+<h3 id="感谢">感谢</h3>
+
+<p>在这里感谢相关书籍及各大博主的技术博客，同时感谢开源时代为学习带来的便利，为我的知识总结打下良好的基础，我也将在以后的学习中养成良好的习惯，多多总结，多多分享！</p>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="footer column">
+    <div class="container">
+
+        
+
+        <div class="copyright">
+
+        
+            
+                <a href="https://codergu64.github.io/license">Copyright © 2015 Nishanth Shanmugham</a>
+            
+        
+
+        </div>
+        <div class="icons">
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="https://github.com/example" rel=me target="_blank">
+                <img class="icon" src="https://codergu64.github.io/img/github.svg" alt="github" />
+            </a>
+        
+
+        
+            <a href="https://twitter.com/example" rel=me target="_blank">
+                <img class="icon" src="https://codergu64.github.io/img/twitter.svg" alt="twitter" />
+            </a>
+        
+
+        
+            <a href="https://www.linkedin.com/in/john-example-aa80ue8%c3%a8" rel=me target="_blank">
+                <img class="icon" src="https://codergu64.github.io/img/linkedin.svg" alt="linkedin" />
+            </a>
+        
+
+        
+
+        
+
+        
+            <a href="mailto:you@example.com">
+                <img class="icon" src="https://codergu64.github.io/img/email.svg" alt="email" />
+            </a>
+        
+
+        
+            <a href="https://codergu64.github.io/index.xml">
+                <img class="icon" src="https://codergu64.github.io/img/rss.svg" alt="rss" />
+            </a>
+        
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    google: {
+      families: ['Raleway:400,600,700', 'Merriweather:300,300i,700,700i', 'Ubuntu+Mono:400,700']
+    }
+  });
+</script>
+
+
+
+  <script src="https://codergu64.github.io/js/highlight.min.js" defer></script>
+  
+
+
+
+  <script src="https://codergu64.github.io/js/progressively.min.js" defer></script>
+
+
+
+
+
+
+
+
+<script>
+  window.onload = function() {
+    
+      hljs.initHighlighting();
+    
+    
+      progressively.init({delay: 30, throttle: 50});
+    
+    
+  };
+</script>
+
+
+
+
+</body>
+</html>
+
